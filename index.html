@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Fishstick Labs</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
-	</head>
-	<body>
-		<div id="main">
-			<div id="header">
-			<h1>Fishstick Labs</h1>
-			<h2>Extracting Value, Disrupting Innovation</h2>
-		</div>
-		</div>
-	</body>
+  <head>
+    <title>Fishstick Labs</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  </head>
+  <body>
+    <table>
+      <tr>
+        <td>
+          <div id="main">
+            <h1 class="animate__animated animate__bounce">Fishstick Labs</h1>
+			<marquee behavior="scroll" direction="left">Extracting Value, Disrupting Innovation, and Transforming Lives</marquee>
+
+            <div class="section-divider"></div>
+            <section id="things">
+              <div class="project">
+                <h3>Library Bot</h3>
+                <p>Library Bot is a simple Slack bot that helps small teams manage their shared resources like staging environments, shared accounts, and other items - so people don't stomp on each other's work.</p>
+                <a href="https://www.librarybot.net">Learn more</a>
+              </div>
+            </section>
+			<div class="section-divider"></div>
+            <section id="contact">
+              <h2>Contact Us</h2>
+              <p>Please email us at <a href="mailto:contact@fishsticklabs.com">contact@fishsticklabs.com</a></p>
+
+			<div id="visitor-counter">0</div>
+			<script>
+			var randomCount = Math.floor(Math.random() * 1000000) + 1;
+			document.getElementById("visitor-counter").innerText = 'You are visitor #' + randomCount;
+			</script>
+            </section>
+            <footer>
+              <p>&copy; Fishstick Labs - 2023</p>
+            </footer>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </body>
 </html>
