@@ -1,0 +1,284 @@
+---
+const title = "Fishstick Labs - Infrastructure & DevOps Advisory";
+const description = "Twenty years designing, scaling, and hardening infrastructure. Independent technical perspective on DevOps, SRE, and platform engineering for early-stage companies.";
+const url = "https://fishsticklabs.com";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="DevOps, SRE, Platform Engineering, Infrastructure Advisory, Cloud Cost Optimization, Kubernetes, Technical Strategy" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:url" content={url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+
+    <link rel="canonical" href={url} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script async data-id="101416164" src="//static.getclicky.com/js"
+    ></script>
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Fishstick Labs",
+        "description": "Infrastructure and DevOps advisory services for early-stage companies",
+        "url": "https://fishsticklabs.com",
+        "founder": {
+          "@type": "Person",
+          "name": "Chris Dodds",
+          "jobTitle": "Infrastructure Advisor",
+          "sameAs": "https://linkedin.com/in/doddschris"
+        },
+        "areaServed": "Worldwide",
+        "serviceType": [
+          "DevOps Consulting",
+          "SRE Consulting",
+          "Platform Engineering",
+          "Cloud Cost Optimization",
+          "Infrastructure Architecture"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #0a0e27;
+    background-image: radial-gradient(
+        circle at 20% 50%,
+        rgba(59, 130, 246, 0.05) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 80%,
+        rgba(139, 92, 246, 0.05) 0%,
+        transparent 50%
+      );
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #e8eaed;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  #main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px 40px;
+    margin: 0 auto;
+    max-width: 720px;
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 3.5em;
+    font-weight: 700;
+    margin: 0 0 0.4em 0;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .fishstick-icon {
+    width: 140px;
+    height: 50px;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 4px 12px rgba(251, 191, 36, 0.2));
+  }
+
+  .tagline {
+    font-size: 1.3em;
+    color: #a8b3cf;
+    margin: 0 0 50px 0;
+    text-align: center;
+    max-width: 640px;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .section-divider {
+    width: 60%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 60px auto;
+  }
+
+  section {
+    width: 100%;
+    margin-bottom: 30px;
+    text-align: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+  }
+
+  section h2 {
+    font-size: 2.2em;
+    font-weight: 600;
+    margin: 0 0 35px 0;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+  }
+
+  section p {
+    font-size: 1.125em;
+    margin: 0 0 16px 0;
+    color: #d1d5db;
+    line-height: 1.75;
+  }
+
+  .capabilities {
+    color: #60a5fa !important;
+    margin-top: 28px !important;
+    font-weight: 500;
+    font-size: 1.05em !important;
+    padding: 16px 24px;
+    background: rgba(96, 165, 250, 0.08);
+    border-radius: 8px;
+    border: 1px solid rgba(96, 165, 250, 0.15);
+    display: inline-block;
+  }
+
+  .intro-text {
+    text-align: left;
+    max-width: 620px;
+    margin: 0 auto 30px;
+    font-size: 1.1em !important;
+  }
+
+  ul {
+    text-align: left;
+    max-width: 620px;
+    margin: 0 auto 30px;
+    padding-left: 25px;
+    list-style: none;
+    color: #d1d5db;
+    line-height: 1.85;
+  }
+
+  ul li {
+    margin-bottom: 16px;
+    position: relative;
+    padding: 12px 12px 12px 32px;
+    background: rgba(96, 165, 250, 0.04);
+    border-radius: 8px;
+    border-left: 2px solid rgba(96, 165, 250, 0.3);
+    transition: all 0.2s ease;
+  }
+
+  ul li:hover {
+    background: rgba(96, 165, 250, 0.08);
+    border-left-color: #60a5fa;
+    transform: translateX(4px);
+  }
+
+  ul li::before {
+    content: "→";
+    position: absolute;
+    left: 12px;
+    color: #60a5fa;
+    font-weight: 600;
+  }
+
+  .contact-details {
+    font-size: 1em !important;
+    margin-top: 25px !important;
+    color: #9ca3af !important;
+  }
+
+  a {
+    color: #60a5fa;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid rgba(96, 165, 250, 0.3);
+    padding-bottom: 2px;
+  }
+
+  a:hover,
+  a:focus {
+    color: #93c5fd;
+    border-bottom: 1px solid #93c5fd;
+  }
+
+  footer {
+    margin-top: 60px;
+    padding: 30px 20px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.95em;
+  }
+
+  footer p {
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.5em;
+    }
+
+    .tagline {
+      font-size: 1.1em;
+    }
+
+    section {
+      padding: 30px 20px;
+    }
+
+    section h2 {
+      font-size: 1.8em;
+    }
+
+    #main {
+      padding: 40px 20px;
+    }
+
+    ul li {
+      font-size: 0.95em;
+      padding: 10px 10px 10px 28px;
+    }
+
+    .intro-text {
+      font-size: 1em !important;
+    }
+  }
+</style>
+
