@@ -38,6 +38,10 @@ const url = "https://fishsticklabs.com";
     />
     <script async data-id="101416164" src="//static.getclicky.com/js"
     ></script>
+    <script
+      data-goatcounter="https://fishsticklabs.goatcounter.com/count"
+      async
+      src="//gc.zgo.at/count.js"></script>
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -75,15 +79,15 @@ const url = "https://fishsticklabs.com";
   }
 
   body {
-    background: #0a0e27;
+    background: #1a1d29;
     background-image: radial-gradient(
         circle at 20% 50%,
-        rgba(59, 130, 246, 0.05) 0%,
+        rgba(139, 92, 246, 0.03) 0%,
         transparent 50%
       ),
       radial-gradient(
         circle at 80% 80%,
-        rgba(139, 92, 246, 0.05) 0%,
+        rgba(236, 72, 153, 0.02) 0%,
         transparent 50%
       );
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -97,12 +101,9 @@ const url = "https://fishsticklabs.com";
   }
 
   #main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 60px 20px 40px;
     margin: 0 auto;
-    max-width: 720px;
+    max-width: 700px;
     width: 100%;
   }
 
@@ -113,6 +114,18 @@ const url = "https://fishsticklabs.com";
     color: #ffffff;
     letter-spacing: -0.02em;
     line-height: 1.1;
+    position: relative;
+  }
+
+  h1::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #8b5cf6, #ec4899);
+    border-radius: 2px;
   }
 
   .fishstick-icon {
@@ -124,89 +137,68 @@ const url = "https://fishsticklabs.com";
 
   .tagline {
     font-size: 1.3em;
-    color: #a8b3cf;
-    margin: 0 0 50px 0;
-    text-align: center;
-    max-width: 640px;
+    color: #b4b8cf;
+    margin: 0 0 60px 0;
     font-weight: 400;
     line-height: 1.6;
   }
 
-  .section-divider {
-    width: 60%;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.08);
-    margin: 60px auto;
-  }
-
   section {
     width: 100%;
-    margin-bottom: 30px;
-    text-align: center;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
+    margin-bottom: 60px;
   }
 
   section h2 {
-    font-size: 2.2em;
+    font-size: 2em;
     font-weight: 600;
-    margin: 0 0 35px 0;
-    color: #ffffff;
+    margin: 0 0 30px 0;
+    color: #f5f5f7;
     letter-spacing: -0.02em;
   }
 
   section p {
     font-size: 1.125em;
     margin: 0 0 16px 0;
-    color: #d1d5db;
+    color: #d8dae5;
     line-height: 1.75;
   }
 
   .capabilities {
-    color: #60a5fa !important;
+    color: #a78bfa !important;
     margin-top: 28px !important;
     font-weight: 500;
     font-size: 1.05em !important;
     padding: 16px 24px;
-    background: rgba(96, 165, 250, 0.08);
+    background: rgba(139, 92, 246, 0.08);
     border-radius: 8px;
-    border: 1px solid rgba(96, 165, 250, 0.15);
-    display: inline-block;
+    border: 1px solid rgba(139, 92, 246, 0.15);
   }
 
   .intro-text {
-    text-align: left;
-    max-width: 620px;
-    margin: 0 auto 30px;
     font-size: 1.1em !important;
   }
 
   ul {
-    text-align: left;
-    max-width: 620px;
-    margin: 0 auto 30px;
-    padding-left: 25px;
+    padding-left: 0;
     list-style: none;
     color: #d1d5db;
     line-height: 1.85;
+    margin: 0 0 30px 0;
   }
 
   ul li {
     margin-bottom: 16px;
     position: relative;
     padding: 12px 12px 12px 32px;
-    background: rgba(96, 165, 250, 0.04);
+    background: rgba(139, 92, 246, 0.04);
     border-radius: 8px;
-    border-left: 2px solid rgba(96, 165, 250, 0.3);
+    border-left: 2px solid rgba(139, 92, 246, 0.3);
     transition: all 0.2s ease;
   }
 
   ul li:hover {
-    background: rgba(96, 165, 250, 0.08);
-    border-left-color: #60a5fa;
+    background: rgba(139, 92, 246, 0.08);
+    border-left-color: #a78bfa;
     transform: translateX(4px);
   }
 
@@ -214,7 +206,7 @@ const url = "https://fishsticklabs.com";
     content: "→";
     position: absolute;
     left: 12px;
-    color: #60a5fa;
+    color: #a78bfa;
     font-weight: 600;
   }
 
@@ -224,26 +216,102 @@ const url = "https://fishsticklabs.com";
     color: #9ca3af !important;
   }
 
+  #latest-post a {
+    display: block;
+    text-decoration: none;
+    border: none;
+  }
+
+  #latest-post h3 {
+    color: #ffffff;
+    font-size: 1.6em;
+    margin: 0 0 16px 0;
+    font-weight: 600;
+  }
+
+  #latest-post .post-excerpt {
+    color: #d8dae5;
+    font-size: 1.05em;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    position: relative;
+  }
+
+  #latest-post .post-excerpt::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3em;
+    background: linear-gradient(to bottom, transparent, rgba(26, 29, 41, 0.9));
+    pointer-events: none;
+  }
+
+  #latest-post .post-excerpt p {
+    color: #d8dae5;
+    margin: 0 0 16px 0;
+  }
+
+  #latest-post .post-excerpt p:last-child {
+    margin-bottom: 0;
+  }
+
+  #latest-post .post-excerpt a {
+    color: #a78bfa;
+    display: inline;
+  }
+
+  #latest-post .post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  #latest-post .post-meta {
+    color: #9ca3af;
+    font-size: 0.95em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #latest-post .post-meta .separator {
+    color: #6b7280;
+  }
+
+  #latest-post .read-more {
+    color: #a78bfa;
+    font-size: 0.95em;
+    white-space: nowrap;
+  }
+
   a {
-    color: #60a5fa;
+    color: #a78bfa;
     text-decoration: none;
     transition: all 0.2s ease;
-    border-bottom: 1px solid rgba(96, 165, 250, 0.3);
+    border-bottom: 1px solid rgba(167, 139, 250, 0.3);
     padding-bottom: 2px;
   }
 
   a:hover,
   a:focus {
-    color: #93c5fd;
-    border-bottom: 1px solid #93c5fd;
+    color: #c4b5fd;
+    border-bottom: 1px solid #c4b5fd;
   }
 
   footer {
-    margin-top: 60px;
-    padding: 30px 20px;
-    text-align: center;
+    margin-top: 80px;
+    padding: 30px 0;
     color: #6b7280;
     font-size: 0.95em;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   footer p {

@@ -1,5 +1,26 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = await getCollection("blog");
+const latestPostData = await (async () => {
+  const filtered = allPosts
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
+
+  if (!filtered) return null;
+
+  const { Content } = await filtered.render();
+  return { post: filtered, Content };
+})();
+
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(date);
+};
 ---
 
 <Layout>
@@ -32,6 +53,34 @@ import Layout from "../layouts/Layout.astro";
         <li>Migration planning that survives contact with reality</li>
       </ul>
     </section>
+
+    {
+      latestPostData && (
+        <section id="latest-post">
+          <h2>Latest Writing</h2>
+          <article>
+            <a href={`/blog/${latestPostData.post.slug}`}>
+              <h3>{latestPostData.post.data.title}</h3>
+            </a>
+            <div class="post-excerpt">
+              <latestPostData.Content />
+            </div>
+            <div class="post-footer">
+              <div class="post-meta">
+                <span>{latestPostData.post.data.author}</span>
+                <span class="separator">•</span>
+                <time>{formatDate(latestPostData.post.data.pubDate)}</time>
+              </div>
+              <a href={`/blog/${latestPostData.post.slug}`} class="read-more">Read more →</a>
+            </div>
+          </article>
+          <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 40px 0;" />
+          <div>
+            <a href="/blog">View all posts →</a>
+          </div>
+        </section>
+      )
+    }
 
     <section id="contact">
       <h2>Contact</h2>
