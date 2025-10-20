@@ -24,12 +24,15 @@ const formatDate = (date: Date) => {
 
 <Layout>
   <div id="main">
-    <h1>Writing</h1>
-    <p class="tagline">
-      <a href="/rss.xml" style="font-size: 0.9em; white-space: nowrap;">RSS →</a>
-    </p>
+    <div class="header-with-nav">
+      <h1>Writing</h1>
+      <div class="nav-links">
+        <a href="/" class="blog-link">Home</a>
+        <a href="/rss.xml" class="blog-link">RSS</a>
+      </div>
+    </div>
 
-    <section id="posts">
+    <section id="posts" style="margin-top: 60px;">
       {
         postsData.length === 0 ? (
           <p style="color: #9ca3af; font-style: italic;">
@@ -60,10 +63,6 @@ const formatDate = (date: Date) => {
         )
       }
     </section>
-
-    <div style="margin-top: 40px;">
-      <a href="/" style="font-size: 1.1em;">← Back to home</a>
-    </div>
   </div>
 </Layout>
 

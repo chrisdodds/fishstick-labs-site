@@ -25,16 +25,19 @@ const formatDate = (date: Date) => {
 
 <Layout>
   <div id="main">
-    <h1>Fishstick Labs</h1>
+    <div class="header-with-nav">
+      <h1>Fishstick Labs</h1>
+      <a href="/blog" class="blog-link">Blog</a>
+    </div>
     <p class="tagline">
       Twenty years building infrastructure. Still learning.
     </p>
 
-    <section id="about">
-      <p>
-        I write about DevOps, SRE, and platform engineering. Sometimes I advise early-stage teams on infrastructure decisions and strategy.
-      </p>
-    </section>
+    <p class="intro">
+      I write about DevOps, SRE, and platform engineering. Sometimes I advise early-stage teams on infrastructure decisions and strategy.
+    </p>
+
+    <hr />
 
     {
       latestPostData && (
@@ -56,7 +59,7 @@ const formatDate = (date: Date) => {
               <a href={`/blog/${latestPostData.post.slug}`} class="read-more">Read more →</a>
             </div>
           </article>
-          <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.08); margin: 40px 0;" />
+          <hr style="margin: 40px 0;" />
           <div>
             <a href="/blog">View all posts →</a>
           </div>
