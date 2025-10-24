@@ -59,13 +59,30 @@ const formatDate = (date: Date) => {
               <a href={`/blog/${latestPostData.post.slug}`} class="read-more">Read more →</a>
             </div>
           </article>
-          <hr style="margin: 40px 0;" />
-          <div>
+          <div style="margin-top: 30px;">
             <a href="/blog">View all posts →</a>
           </div>
         </section>
       )
     }
+
+    <hr />
+
+    <section id="recent-projects">
+      <h2>Recent Projects</h2>
+      <div class="case-study">
+        <h3>Multi-Environment AWS Infrastructure</h3>
+        <p class="case-meta">Athletic Tech SaaS Company</p>
+        <p>
+          The team had outgrown their single environment but needed a path to production (and a major launch) that wouldn't become a maintenance nightmare. Helped them design templated infrastructure, establish observability from the start, and automate deployments across environments. Focus was on making everything maintainable and ensuring the team could own it going forward.
+        </p>
+        <p class="case-outcome">
+          Outcome: A low stress launch, production-ready infrastructure, automated deployments, and a team that knows how it all works.
+        </p>
+      </div>
+    </section>
+
+    <hr />
 
     <section id="contact">
       <h2>Contact</h2>
