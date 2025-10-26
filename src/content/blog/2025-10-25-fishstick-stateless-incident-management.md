@@ -37,4 +37,3 @@ Built it in TypeScript with the Slack Bolt framework. Supports Socket Mode for l
 I've pared down the features quite a bit from what I have in other versions of the bot to keep things simple, but will be adding back some things like webhooks over time.
 
 It's MIT licensed. If you run incidents in Slack and want something between "too basic" and "too much," check it out: [github.com/chrisdodds/fishstick](https://github.com/chrisdodds/fishstick)
-
