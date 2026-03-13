@@ -22,17 +22,21 @@ const formatDate = (date: Date) => {
 };
 ---
 
-<Layout>
-  <div id="main">
-    <div class="header-with-nav">
-      <h1>Writing</h1>
+<Layout title="Blog - Fishstick Labs" description="Writing about DevOps, SRE, and platform engineering." canonicalPath="/blog">
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Fishstick Labs</a>
       <div class="nav-links">
-        <a href="/" class="blog-link">Home</a>
-        <a href="/rss.xml" class="blog-link">RSS</a>
+        <a href="/blog" class="nav-link">Blog</a>
+        <a href="/rss.xml" class="nav-link">RSS</a>
       </div>
     </div>
+  </nav>
 
-    <section id="posts" style="margin-top: 60px;">
+  <div id="main">
+    <h1>Writing</h1>
+
+    <section id="posts" style="margin-top: 40px;">
       {
         postsData.length === 0 ? (
           <p style="color: #9ca3af; font-style: italic;">
@@ -67,6 +71,14 @@ const formatDate = (date: Date) => {
 </Layout>
 
 <style>
+  h1 {
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: #ffffff;
+    background-clip: unset;
+    color: #ffffff;
+  }
+
   .post-list {
     display: flex;
     flex-direction: column;

@@ -24,76 +24,121 @@ const formatDate = (date: Date) => {
 ---
 
 <Layout>
-  <div id="main">
-    <div class="header-with-nav">
-      <h1>Fishstick Labs</h1>
-      <a href="/blog" class="blog-link">Blog</a>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Fishstick Labs</a>
+      <div class="nav-links">
+        <a href="/blog" class="nav-link">Blog</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
     </div>
-    <p class="tagline">
-      Twenty years building infrastructure. Still learning.
-    </p>
+  </nav>
 
-    <p class="intro">
-      I write about DevOps, SRE, and platform engineering. Sometimes I advise early-stage teams on infrastructure decisions and strategy.
-    </p>
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Fishstick Labs</h1>
+      <p class="tagline">
+        Twenty years of infrastructure. Now I help teams get it right.
+      </p>
+      <p class="intro">
+        I advise early-stage teams on infrastructure, operations, and the decisions that are hard to undo. I also write about DevOps, SRE, and platform engineering.
+      </p>
+    </div>
+  </section>
 
-    <hr />
+  <section id="recent-projects">
+    <div class="section-wide">
+      <h2>Selected Work</h2>
+      <div class="case-study-grid">
+        <div class="case-study">
+          <span class="case-tag">Greenfield</span>
+          <div class="case-stat">
+            <span class="stat-number">2 mo</span>
+            <span class="stat-label">Delivery</span>
+          </div>
+          <h3>Launch-Ready Infrastructure</h3>
+          <p class="case-meta">Athletic Tech SaaS Company</p>
+          <p>
+            An early-stage team with a major launch months away and infrastructure that wasn't ready for it. Guided the architecture and helped the team stand up multi-environment dev pipelines, environment syncing, data infrastructure, observability, and automated deployments. Everything code-defined and built so the team could own it going forward.
+          </p>
+          <p class="case-outcome">
+            On-time launch, infrastructure that scaled with their growth, and a team that didn't need me anymore.
+          </p>
+        </div>
+        <div class="case-study">
+          <span class="case-tag">Migration</span>
+          <div class="case-stat">
+            <span class="stat-number">0</span>
+            <span class="stat-label">Downtime</span>
+          </div>
+          <h3>Acquisition Migration</h3>
+          <p class="case-meta">Major EdTech Company</p>
+          <p>
+            After an acquisition, the platform needed to move out of the parent company's AWS accounts and into the new owner's environment. Defined the migration strategy and led execution over three months — code-defined all existing infrastructure, redesigned components for portability, and cut over cleanly so the acquiring company could integrate on their own timeline.
+          </p>
+          <p class="case-outcome">
+            Zero-downtime cutover and a foundation the new team could build on independently.
+          </p>
+        </div>
+        <div class="case-study">
+          <span class="case-tag">Scaling</span>
+          <div class="case-stat">
+            <span class="stat-number">20x</span>
+            <span class="stat-label">Traffic Growth</span>
+          </div>
+          <h3>Heroku to Kubernetes Migration</h3>
+          <p class="case-meta">Early Childhood EdTech Company</p>
+          <p>
+            A fast-growing platform hitting the ceiling on Heroku. Designed the target architecture on EKS, guided the containerization effort, and established the deployment pipelines and SRE practices — incident response, observability, operational runbooks — so the team could keep scaling without things falling over. Grew from 10k to 200k requests per minute.
+          </p>
+          <p class="case-outcome">
+            20x traffic growth on infrastructure the team operates themselves.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    {
-      latestPostData && (
-        <section id="latest-post">
+  {
+    latestPostData && (
+      <section id="latest-post">
+        <div class="section-wide">
           <h2>Latest Writing</h2>
-          <article>
-            <a href={`/blog/${latestPostData.post.slug}`}>
-              <h3>{latestPostData.post.data.title}</h3>
-            </a>
-            <div class="post-excerpt">
-              <latestPostData.Content />
-            </div>
-            <div class="post-footer">
-              <div class="post-meta">
-                <span>{latestPostData.post.data.author}</span>
-                <span class="separator">•</span>
-                <time>{formatDate(latestPostData.post.data.pubDate)}</time>
+          <div class="latest-post-card">
+            <article>
+              <a href={`/blog/${latestPostData.post.slug}`}>
+                <h3>{latestPostData.post.data.title}</h3>
+              </a>
+              <div class="post-excerpt">
+                <latestPostData.Content />
               </div>
-              <a href={`/blog/${latestPostData.post.slug}`} class="read-more">Read more →</a>
-            </div>
-          </article>
-          <div style="margin-top: 30px;">
+              <div class="post-footer">
+                <div class="post-meta">
+                  <span>{latestPostData.post.data.author}</span>
+                  <span class="separator">•</span>
+                  <time>{formatDate(latestPostData.post.data.pubDate)}</time>
+                </div>
+                <a href={`/blog/${latestPostData.post.slug}`} class="read-more">Read more →</a>
+              </div>
+            </article>
+          </div>
+          <div class="all-posts-link">
             <a href="/blog">View all posts →</a>
           </div>
-        </section>
-      )
-    }
+        </div>
+      </section>
+    )
+  }
 
-    <hr />
-
-    <section id="recent-projects">
-      <h2>Recent Projects</h2>
-      <div class="case-study">
-        <h3>Multi-Environment AWS Infrastructure</h3>
-        <p class="case-meta">Athletic Tech SaaS Company</p>
-        <p>
-          The team had outgrown their single environment but needed a path to production (and a major launch) that wouldn't become a maintenance nightmare. Helped them design templated infrastructure, establish observability from the start, and automate deployments across environments. Focus was on making everything maintainable and ensuring the team could own it going forward.
-        </p>
-        <p class="case-outcome">
-          Outcome: A low stress launch, production-ready infrastructure, automated deployments, and a team that knows how it all works.
-        </p>
+  <section id="contact" class="contact-section">
+    <div class="section-wide">
+      <div class="contact-card">
+        <p>Thinking through an infrastructure decision? <a href="mailto:contact@fishsticklabs.com">contact@fishsticklabs.com</a></p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <hr />
-
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>Interested in talking? Email <a href="mailto:contact@fishsticklabs.com">contact@fishsticklabs.com</a></p>
-      <p class="contact-details">
-        Based in Oklahoma City<br/>
-        LinkedIn: <a href="https://linkedin.com/in/doddschris">linkedin.com/in/doddschris</a>
-      </p>
-    </section>
-    <footer>
-      <p>&copy; 2025 - Fishstick Labs</p>
-    </footer>
-  </div>
+  <footer class="site-footer">
+    <p>&copy; {new Date().getFullYear()} Fishstick Labs</p>
+  </footer>
 </Layout>

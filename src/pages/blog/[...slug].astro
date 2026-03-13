@@ -25,7 +25,16 @@ const formatDate = (date: Date) => {
 };
 ---
 
-<Layout>
+<Layout title={`${post.data.title} - Fishstick Labs`} description={post.data.description} canonicalPath={`/blog/${post.slug}`}>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Fishstick Labs</a>
+      <div class="nav-links">
+        <a href="/blog" class="nav-link">Blog</a>
+      </div>
+    </div>
+  </nav>
+
   <div id="main">
     <article class="blog-post">
       <header class="post-header">
@@ -43,7 +52,7 @@ const formatDate = (date: Date) => {
     </article>
 
     <div style="margin-top: 60px;">
-      <a href="/blog" style="font-size: 1.1em;">← All posts</a>
+      <a href="/blog">← All posts</a>
     </div>
   </div>
 </Layout>
@@ -63,6 +72,11 @@ const formatDate = (date: Date) => {
     font-size: 2.5em;
     margin: 0 0 15px 0;
     line-height: 1.2;
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: #ffffff;
+    background-clip: unset;
+    color: #ffffff;
   }
 
   .post-meta {

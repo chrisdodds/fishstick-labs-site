@@ -1,7 +1,16 @@
 ---
-const title = "Fishstick Labs - Infrastructure & DevOps Advisory";
-const description = "Twenty years designing, scaling, and hardening infrastructure. Independent technical perspective on DevOps, SRE, and platform engineering for early-stage companies.";
-const url = "https://fishsticklabs.com";
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+}
+
+const defaultTitle = "Fishstick Labs - Infrastructure & DevOps Advisory";
+const defaultDescription = "Infrastructure advisory for early-stage teams. Twenty years of DevOps, SRE, and platform engineering experience helping teams make the right infrastructure decisions.";
+const siteUrl = "https://fishsticklabs.com";
+
+const { title = defaultTitle, description = defaultDescription, canonicalPath = "" } = Astro.props;
+const canonicalUrl = `${siteUrl}${canonicalPath}`;
 ---
 
 <!DOCTYPE html>
@@ -11,7 +20,6 @@ const url = "https://fishsticklabs.com";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="DevOps, SRE, Platform Engineering, Infrastructure Advisory, Cloud Cost Optimization, Kubernetes, Technical Strategy" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -21,17 +29,17 @@ const url = "https://fishsticklabs.com";
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={url} />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary" />
-    <meta property="twitter:url" content={url} />
+    <meta property="twitter:url" content={canonicalUrl} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
 
-    <link rel="canonical" href={url} />
+    <link rel="canonical" href={canonicalUrl} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -110,77 +118,112 @@ const url = "https://fishsticklabs.com";
     width: 100%;
   }
 
-  .header-with-nav {
+  .site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(26, 29, 41, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 16px 20px;
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
+  }
+
+  .nav-logo {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    border: none;
+    padding: 0;
+  }
+
+  .nav-logo:hover {
+    color: #c4b5fd;
+    border: none;
   }
 
   .nav-links {
     display: flex;
-    gap: 20px;
+    gap: 24px;
     align-items: center;
   }
 
-  .blog-link {
-    font-size: 1.1em;
+  .nav-link {
+    font-size: 0.95em;
     font-weight: 500;
-    color: #a78bfa;
+    color: #9ca3af;
     text-decoration: none;
     border: none;
     padding: 0;
-    margin-bottom: 0.4em;
-    transition: all 0.2s ease;
+    transition: color 0.2s ease;
   }
 
-  .blog-link:hover {
-    color: #c4b5fd;
+  .nav-link:hover {
+    color: #e8eaed;
     border: none;
   }
 
   h1 {
     font-size: 3.5em;
     font-weight: 700;
-    margin: 0 0 0.4em 0;
-    color: #ffffff;
+    margin: 0 0 0.5em 0;
     letter-spacing: -0.02em;
     line-height: 1.1;
-    position: relative;
+    background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 50%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  h1::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background: linear-gradient(90deg, #8b5cf6, #ec4899);
-    border-radius: 2px;
+  .hero {
+    padding: 70px 20px 50px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: radial-gradient(
+      ellipse at 50% 0%,
+      rgba(139, 92, 246, 0.08) 0%,
+      transparent 60%
+    );
+    margin-bottom: 0;
   }
 
-  .fishstick-icon {
-    width: 140px;
-    height: 50px;
-    margin-bottom: 25px;
-    filter: drop-shadow(0 4px 12px rgba(251, 191, 36, 0.2));
+  .hero-inner {
+    max-width: 650px;
+    margin: 0 auto;
   }
 
   .tagline {
-    font-size: 1.3em;
-    color: #b4b8cf;
-    margin: 0 0 30px 0;
-    font-weight: 400;
-    line-height: 1.6;
+    font-size: 1.4em;
+    color: #e8eaed;
+    margin: 0 0 16px 0;
+    font-weight: 500;
+    line-height: 1.5;
   }
 
   .intro {
-    font-size: 1.125em;
-    color: #d8dae5;
-    margin: 0 0 40px 0;
+    font-size: 1.1em;
+    color: #9ca3af;
+    margin: 0;
     line-height: 1.75;
+  }
+
+  .section-wide {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 50px 20px;
+  }
+
+  .section-wide h2 {
+    text-align: center;
   }
 
   hr {
@@ -191,13 +234,13 @@ const url = "https://fishsticklabs.com";
 
   section {
     width: 100%;
-    margin-bottom: 60px;
+    margin-bottom: 0;
   }
 
   section h2 {
-    font-size: 2em;
+    font-size: 1.8em;
     font-weight: 600;
-    margin: 0 0 30px 0;
+    margin: 0 0 24px 0;
     color: #f5f5f7;
     letter-spacing: -0.02em;
   }
@@ -207,6 +250,93 @@ const url = "https://fishsticklabs.com";
     margin: 0 0 16px 0;
     color: #d8dae5;
     line-height: 1.75;
+  }
+
+  .case-study-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .case-study {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 24px 24px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .case-study:hover {
+    border-color: rgba(167, 139, 250, 0.25);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .case-tag {
+    display: inline-block;
+    font-size: 0.7em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #a78bfa;
+    background: rgba(139, 92, 246, 0.12);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    align-self: flex-start;
+  }
+
+  .case-stat {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .stat-number {
+    font-size: 2em;
+    font-weight: 700;
+    color: #a78bfa;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.75em;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .case-study h3 {
+    font-size: 1.2em;
+    color: #ffffff;
+    margin: 0 0 4px 0;
+    font-weight: 600;
+  }
+
+  .case-study .case-meta {
+    font-size: 0.85em !important;
+    color: #9ca3af !important;
+    margin: 0 0 14px 0 !important;
+  }
+
+  .case-study p {
+    font-size: 0.9em;
+    margin: 0 0 10px 0;
+    line-height: 1.65;
+  }
+
+  .case-study .case-outcome {
+    color: #a78bfa !important;
+    font-weight: 500;
+    font-size: 0.9em !important;
+    margin-top: auto !important;
+    margin-bottom: 0 !important;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .capabilities {
@@ -245,10 +375,24 @@ const url = "https://fishsticklabs.com";
     color: #a78bfa;
   }
 
-  .contact-details {
-    font-size: 1em !important;
-    margin-top: 25px !important;
-    color: #9ca3af !important;
+  /* Latest post */
+  .latest-post-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 32px 36px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .latest-post-card img,
+  .latest-post-card div[style] {
+    display: none;
+  }
+
+  .all-posts-link {
+    text-align: center;
+    margin-top: 20px;
   }
 
   #latest-post a {
@@ -259,18 +403,18 @@ const url = "https://fishsticklabs.com";
 
   #latest-post h3 {
     color: #ffffff;
-    font-size: 1.6em;
+    font-size: 1.5em;
     margin: 0 0 16px 0;
     font-weight: 600;
   }
 
   #latest-post .post-excerpt {
     color: #d8dae5;
-    font-size: 1.05em;
+    font-size: 1em;
     line-height: 1.7;
     margin-bottom: 16px;
     display: -webkit-box;
-    -webkit-line-clamp: 6;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
     position: relative;
@@ -283,7 +427,7 @@ const url = "https://fishsticklabs.com";
     left: 0;
     width: 100%;
     height: 3em;
-    background: linear-gradient(to bottom, transparent, rgba(26, 29, 41, 0.9));
+    background: linear-gradient(to bottom, transparent, rgba(30, 33, 46, 1));
     pointer-events: none;
   }
 
@@ -311,7 +455,7 @@ const url = "https://fishsticklabs.com";
 
   #latest-post .post-meta {
     color: #9ca3af;
-    font-size: 0.95em;
+    font-size: 0.9em;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -323,10 +467,35 @@ const url = "https://fishsticklabs.com";
 
   #latest-post .read-more {
     color: #a78bfa;
-    font-size: 0.95em;
+    font-size: 0.9em;
     white-space: nowrap;
   }
 
+  /* Contact */
+  .contact-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .contact-card {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-card p {
+    font-size: 1.05em;
+    margin: 0 0 8px 0;
+    color: #d8dae5;
+  }
+
+  .contact-details {
+    font-size: 0.95em !important;
+    margin-top: 12px !important;
+    margin-bottom: 0 !important;
+    color: #9ca3af !important;
+  }
+
+  /* Links */
   a {
     color: #a78bfa;
     text-decoration: none;
@@ -341,16 +510,24 @@ const url = "https://fishsticklabs.com";
     border-bottom: 1px solid #c4b5fd;
   }
 
-  footer {
-    margin-top: 80px;
-    padding: 30px 0;
+  /* Footer */
+  .site-footer {
+    text-align: center;
+    padding: 24px 20px;
     color: #6b7280;
-    font-size: 0.95em;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.85em;
   }
 
-  footer p {
+  .site-footer p {
     margin: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .case-study-grid {
+      grid-template-columns: 1fr;
+      max-width: 600px;
+      margin: 0 auto;
+    }
   }
 
   @media (max-width: 768px) {
@@ -358,20 +535,16 @@ const url = "https://fishsticklabs.com";
       font-size: 2.5em;
     }
 
-    .header-with-nav {
-      gap: 16px;
+    .hero {
+      padding: 60px 20px 50px;
     }
 
-    .nav-links {
-      gap: 16px;
-    }
-
-    .blog-link {
-      font-size: 1em;
+    .hero {
+      padding: 50px 20px 50px;
     }
 
     .tagline {
-      font-size: 1.1em;
+      font-size: 1.2em;
     }
 
     .intro {
@@ -393,6 +566,10 @@ const url = "https://fishsticklabs.com";
 
     .intro-text {
       font-size: 1em !important;
+    }
+
+    .case-study {
+      padding: 20px 20px;
     }
   }
 </style>
