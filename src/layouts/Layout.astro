@@ -3,13 +3,15 @@ interface Props {
   title?: string;
   description?: string;
   canonicalPath?: string;
+  /** When true, add noindex/nofollow and omit canonical (use for 404, etc.) */
+  noIndex?: boolean;
 }
 
 const defaultTitle = "Fishstick Labs - Infrastructure & DevOps Advisory";
 const defaultDescription = "Infrastructure advisory for early-stage teams. Twenty years of DevOps, SRE, and platform engineering experience helping teams make the right infrastructure decisions.";
 const siteUrl = "https://fishsticklabs.com";
 
-const { title = defaultTitle, description = defaultDescription, canonicalPath = "" } = Astro.props;
+const { title = defaultTitle, description = defaultDescription, canonicalPath = "", noIndex = false } = Astro.props;
 const canonicalUrl = `${siteUrl}${canonicalPath}`;
 ---
 
@@ -39,7 +41,8 @@ const canonicalUrl = `${siteUrl}${canonicalPath}`;
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
 
-    <link rel="canonical" href={canonicalUrl} />
+    {noIndex && <meta name="robots" content="noindex, nofollow" />}
+    {!noIndex && <link rel="canonical" href={canonicalUrl} />}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
