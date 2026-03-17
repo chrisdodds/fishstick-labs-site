@@ -29,11 +29,28 @@ const formatDate = (date: Date) => {
       <div class="nav-links">
         <a href="/blog" class="nav-link">Blog</a>
         <a href="/rss.xml" class="nav-link">RSS</a>
+        <a href="/#contact" class="nav-link">Contact</a>
       </div>
     </div>
   </nav>
 
   <div id="main">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span class="breadcrumb-sep">/</span>
+      <span aria-current="page">Blog</span>
+    </nav>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fishsticklabs.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://fishsticklabs.com/blog" }
+        ]
+      }
+    </script>
+
     <h1>Writing</h1>
 
     <section id="posts" style="margin-top: 40px;">
@@ -68,9 +85,36 @@ const formatDate = (date: Date) => {
       }
     </section>
   </div>
+
+  <footer class="site-footer">
+    <p>
+      <a href="/">Home</a>
+      <span class="footer-sep">·</span>
+      <a href="/blog">Blog</a>
+      <span class="footer-sep">·</span>
+      <a href="/#contact">Contact</a>
+    </p>
+    <p>&copy; {new Date().getFullYear()} Fishstick Labs</p>
+  </footer>
 </Layout>
 
 <style>
+  .breadcrumb {
+    font-size: 0.9em;
+    color: #9ca3af;
+    margin-bottom: 24px;
+  }
+
+  .breadcrumb a {
+    color: #a78bfa;
+    border: none;
+  }
+
+  .breadcrumb-sep {
+    margin: 0 0.4em;
+    color: #6b7280;
+  }
+
   h1 {
     background: none;
     -webkit-background-clip: unset;

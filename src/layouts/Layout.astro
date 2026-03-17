@@ -8,7 +8,7 @@ interface Props {
 }
 
 const defaultTitle = "Fishstick Labs - Infrastructure & DevOps Advisory";
-const defaultDescription = "Infrastructure advisory for early-stage teams. Twenty years of DevOps, SRE, and platform engineering experience helping teams make the right infrastructure decisions.";
+const defaultDescription = "I help early-stage SaaS companies stop overpaying for infrastructure and build the foundation to scale. Advisory on costs, compliance-ready architecture, and platform engineering.";
 const siteUrl = "https://fishsticklabs.com";
 
 const { title = defaultTitle, description = defaultDescription, canonicalPath = "", noIndex = false } = Astro.props;
@@ -523,6 +523,20 @@ const canonicalUrl = `${siteUrl}${canonicalPath}`;
 
   .site-footer p {
     margin: 0;
+  }
+
+  .site-footer a {
+    color: #9ca3af;
+    border: none;
+  }
+
+  .site-footer a:hover {
+    color: #e8eaed;
+  }
+
+  .footer-sep {
+    margin: 0 0.35em;
+    color: #4b5563;
   }
 
   @media (max-width: 1024px) {
