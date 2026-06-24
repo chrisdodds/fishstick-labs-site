@@ -3,24 +3,13 @@ import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
 const allPosts = await getCollection("blog");
-const latestPostData = await (async () => {
-  const filtered = allPosts
-    .filter((post) => !post.data.draft)
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
+const recentPosts = allPosts
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
 
-  if (!filtered) return null;
-
-  const { Content } = await filtered.render();
-  return { post: filtered, Content };
-})();
-
-const formatDate = (date: Date) => {
-  return new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(date);
-};
+const monthYear = (date: Date) =>
+  `${date.getFullYear()} · ${String(date.getMonth() + 1).padStart(2, "0")}`;
 ---
 
 <Layout
@@ -29,119 +18,123 @@ const formatDate = (date: Date) => {
 >
   <nav class="site-nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo">Fishstick Labs</a>
+      <a href="/" class="nav-logo"><span class="dot"></span>Fishstick Labs</a>
       <div class="nav-links">
-        <a href="/blog" class="nav-link">Blog</a>
-        <a href="#contact" class="nav-link">Contact</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#writing" class="nav-link">Writing</a>
+        <a href="mailto:contact@fishsticklabs.com" class="nav-link">Contact</a>
       </div>
     </div>
   </nav>
 
-  <section class="hero">
+  <!-- HERO -->
+  <header class="hero" id="top">
     <div class="hero-inner">
-      <h1>Fishstick Labs</h1>
-      <p class="tagline">
-        I help early-stage SaaS companies stop overpaying for infrastructure and build the foundation to scale.
+      <div class="kicker" style="margin-bottom: 22px;">Infrastructure &amp; DevOps Advisory</div>
+      <h1>Get the hard-to-undo infrastructure decisions right the first time.</h1>
+      <p class="lead">
+        I advise early-stage SaaS teams on infrastructure costs, compliance-ready architecture, and the platform foundations that are expensive to retrofit later.
       </p>
-      <p class="intro">
-        I advise on infrastructure costs, compliance-ready architecture, and the decisions that are hard to undo. I also write about DevOps, SRE, and platform engineering.
-      </p>
+      <div class="hero-actions">
+        <a href="mailto:contact@fishsticklabs.com" class="btn btn-primary">Start a conversation →</a>
+        <a href="#writing" class="btn btn-ghost">Read the writing</a>
+        <span class="avail"><span class="dot"></span>Taking select advisory work</span>
+      </div>
     </div>
-  </section>
+  </header>
 
-  <section id="recent-projects">
-    <div class="section-wide">
-      <h2>Selected Work</h2>
-      <div class="case-study-grid">
-        <div class="case-study">
-          <span class="case-tag">Greenfield</span>
-          <div class="case-stat">
-            <span class="stat-number">2 mo</span>
-            <span class="stat-label">Delivery</span>
-          </div>
-          <h3>Launch-Ready Infrastructure</h3>
-          <p class="case-meta">Athletic Tech SaaS Company</p>
-          <p>
-            An early-stage team with a major launch months away and infrastructure that wasn't ready for it. Guided the architecture and helped the team stand up multi-environment dev pipelines, environment syncing, data infrastructure, observability, and automated deployments. Everything code-defined and built so the team could own it going forward.
-          </p>
-          <p class="case-outcome">
-            On-time launch, infrastructure that scaled with their growth, and a team that didn't need me anymore.
-          </p>
-        </div>
-        <div class="case-study">
-          <span class="case-tag">Migration</span>
-          <div class="case-stat">
-            <span class="stat-number">0</span>
-            <span class="stat-label">Downtime</span>
-          </div>
-          <h3>Acquisition Migration</h3>
-          <p class="case-meta">Major EdTech Company</p>
-          <p>
-            After an acquisition, the platform needed to move out of the parent company's AWS accounts and into the new owner's environment. Defined the migration strategy and led execution over three months — code-defined all existing infrastructure, redesigned components for portability, and cut over cleanly so the acquiring company could integrate on their own timeline.
-          </p>
-          <p class="case-outcome">
-            Zero-downtime cutover and a foundation the new team could build on independently.
-          </p>
-        </div>
-        <div class="case-study">
-          <span class="case-tag">Scaling</span>
-          <div class="case-stat">
-            <span class="stat-number">20x</span>
-            <span class="stat-label">Traffic Growth</span>
-          </div>
-          <h3>Heroku to Kubernetes Migration</h3>
-          <p class="case-meta">Early Childhood EdTech Company</p>
-          <p>
-            A fast-growing platform hitting the ceiling on Heroku. Designed the target architecture on EKS, guided the containerization effort, and established the deployment pipelines and SRE practices — incident response, observability, operational runbooks — so the team could keep scaling without things falling over. Grew from 10k to 200k requests per minute.
-          </p>
-          <p class="case-outcome">
-            20x traffic growth on infrastructure the team operates themselves.
-          </p>
-        </div>
+  <!-- CAPABILITIES -->
+  <section class="wrap section">
+    <div class="eyebrow" style="margin-bottom: 0;">What I help with</div>
+    <div class="cap-grid">
+      <div class="cap">
+        <h3>Cost Optimization</h3>
+        <p>Finding the spend that isn't buying you anything — savings plans, storage tiering, and the orphaned resources nobody's watching.</p>
+      </div>
+      <div class="cap">
+        <h3>Compliance-Ready Architecture</h3>
+        <p>Building for the audits you'll face later — before they turn into a rebuild you didn't budget for.</p>
+      </div>
+      <div class="cap">
+        <h3>Platform Engineering</h3>
+        <p>Code-defined infrastructure, multi-environment pipelines, and deployments your team actually owns.</p>
+      </div>
+      <div class="cap">
+        <h3>Reliability &amp; SRE</h3>
+        <p>Observability, incident response, and the runbooks that keep scaling from breaking things.</p>
       </div>
     </div>
   </section>
 
-  {
-    latestPostData && (
-      <section id="latest-post">
-        <div class="section-wide">
-          <h2>Latest Writing</h2>
-          <div class="latest-post-card">
-            <article>
-              <a href={`/blog/${latestPostData.post.slug}`}>
-                <h3>{latestPostData.post.data.title}</h3>
-              </a>
-              <div class="post-excerpt">
-                <latestPostData.Content />
-              </div>
-              <div class="post-footer">
-                <div class="post-meta">
-                  <span>{latestPostData.post.data.author}</span>
-                  <span class="separator">•</span>
-                  <time>{formatDate(latestPostData.post.data.pubDate)}</time>
-                </div>
-                <a href={`/blog/${latestPostData.post.slug}`} class="read-more">Read more →</a>
-              </div>
-            </article>
-          </div>
-          <div class="all-posts-link">
-            <a href="/blog">View all posts →</a>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  <section id="contact" class="contact-section">
-    <div class="section-wide">
-      <div class="contact-card">
-        <p>Occasionally available for advisory engagements. Reach out and let's see if it's a fit. <a href="mailto:contact@fishsticklabs.com">contact@fishsticklabs.com</a></p>
+  <!-- WORK -->
+  <section class="wrap section" id="work">
+    <div class="eyebrow">Selected work</div>
+    <p style="margin: 6px 0 30px; font-size: 15px; color: var(--muted); max-width: 560px;">
+      Client names withheld under NDA — the numbers are real.
+    </p>
+    <div class="case-grid">
+      <div class="case-study">
+        <span class="case-tag">Greenfield</span>
+        <div class="case-stat"><span class="stat-number">2 mo</span><span class="stat-unit">to launch-ready</span></div>
+        <h3>Launch-Ready Infrastructure</h3>
+        <div class="case-sub">Early-stage athletic-tech SaaS</div>
+        <p>A major launch months out and infrastructure that wasn't ready. Guided the architecture and stood up multi-environment pipelines, data infrastructure, observability, and automated deployments — all code-defined so the team could own it.</p>
+        <p class="case-outcome">On-time launch and a team that didn't need me anymore.</p>
+      </div>
+      <div class="case-study">
+        <span class="case-tag">Migration</span>
+        <div class="case-stat"><span class="stat-number">0</span><span class="stat-unit">downtime</span></div>
+        <h3>Acquisition Migration</h3>
+        <div class="case-sub">Post-acquisition EdTech platform</div>
+        <p>After an acquisition, the platform had to move out of the parent's AWS accounts. Defined the strategy and led execution over three months — code-defined existing infrastructure, redesigned for portability, and cut over cleanly.</p>
+        <p class="case-outcome">Zero-downtime cutover the new team could build on independently.</p>
+      </div>
+      <div class="case-study">
+        <span class="case-tag">Scaling</span>
+        <div class="case-stat"><span class="stat-number">20×</span><span class="stat-unit">traffic growth</span></div>
+        <h3>Heroku → Kubernetes</h3>
+        <div class="case-sub">Early-childhood EdTech · 10k → 200k req/min</div>
+        <p>A fast-growing platform hitting the ceiling on Heroku. Designed the target architecture on EKS, guided containerization, and established the deployment pipelines and SRE practices to keep scaling without things falling over.</p>
+        <p class="case-outcome">20× growth on infrastructure the team operates themselves.</p>
       </div>
     </div>
   </section>
 
-  <footer class="site-footer">
-    <p>&copy; {new Date().getFullYear()} Fishstick Labs</p>
-  </footer>
+  <!-- APPROACH -->
+  <section class="wrap" style="padding: 14px 28px 64px;">
+    <div class="approach">
+      <div class="kicker">How I work</div>
+      <p>
+        I take on a small number of advisory engagements at a time and work alongside your team rather than around them. Everything is code-defined and documented, so what we build doesn't leave when I do — the goal is to make myself unnecessary.
+      </p>
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section class="wrap section" id="writing">
+    <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 28px; flex-wrap: wrap;">
+      <div class="eyebrow">Recent writing</div>
+      <a href="/blog" class="link" style="font-size: 14px;">View all posts →</a>
+    </div>
+    <div class="post-list">
+      {recentPosts.map((post) => (
+        <a href={`/blog/${post.slug}`} class="post-row post-row-compact">
+          <span class="date">{monthYear(post.data.pubDate)}</span>
+          <span style="flex: 1; min-width: 0;">
+            <span class="post-title">{post.data.title}</span>
+            <p>{post.data.description}</p>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="wrap contact" id="contact" style="border-top: 1px solid rgba(255,255,255,0.06);">
+    <h2>Have a problem worth a second opinion?</h2>
+    <p>Occasionally available for advisory engagements. Reach out and let's see if it's a fit.</p>
+    <a href="mailto:contact@fishsticklabs.com" class="btn btn-primary">contact@fishsticklabs.com</a>
+  </section>
+
+  <footer class="site-footer">© {new Date().getFullYear()} Fishstick Labs</footer>
 </Layout>

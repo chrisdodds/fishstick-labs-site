@@ -3,18 +3,36 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Page Not Found - Fishstick Labs" noIndex>
-  <div id="main">
-    <h1 style="font-size: 6em; margin: 0;">404</h1>
-    <p class="tagline" style="margin-bottom: 40px;">
-      Page not found. That's on me.
-    </p>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo"><span class="dot"></span>Fishstick Labs</a>
+      <div class="nav-links">
+        <a href="/blog" class="nav-link">Blog</a>
+        <a href="mailto:contact@fishsticklabs.com" class="nav-link">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-    <section id="back">
-      <p>
-        <a href="/" style="font-size: 1.2em;">← Back to home</a>
-      </p>
-    </section>
-  </div>
+  <main class="nf">
+    <div class="kicker" style="margin-bottom: 24px;">Error 404</div>
+    <div class="nf-code">404</div>
+    <div class="nf-sub">curl -I returned nothing useful</div>
+    <h1 class="nf-title">Page not found. That's on me.</h1>
+    <p class="nf-text">This route doesn't resolve. No downtime, just nothing here. Let's get you back to solid ground.</p>
+    <div class="nf-actions">
+      <a href="/" class="btn btn-primary">← Back to home</a>
+      <a href="/blog" class="btn btn-ghost">Read the writing</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">© {new Date().getFullYear()} Fishstick Labs</footer>
 </Layout>
 
-
+<style is:global>
+  .nf { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 28px; }
+  .nf-code { font-size: clamp(96px, 18vw, 176px); font-weight: 700; letter-spacing: -0.04em; line-height: 0.9; color: var(--heading); margin-bottom: 8px; }
+  .nf-sub { font-family: var(--mono); font-size: 13px; color: #5d6575; margin-bottom: 28px; }
+  .nf-title { font-size: clamp(22px, 3vw, 30px); font-weight: 600; color: var(--text); margin: 0 0 14px; letter-spacing: -0.01em; }
+  .nf-text { font-size: 16px; color: var(--muted); margin: 0 0 36px; max-width: 380px; }
+  .nf-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+</style>

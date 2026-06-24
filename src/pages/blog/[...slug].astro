@@ -17,6 +17,9 @@ const post = Astro.props;
 const { Content } = await post.render();
 
 const siteUrl = "https://fishsticklabs.com";
+const words = (post.body || "").trim().split(/\s+/).length;
+const readingTime = Math.max(1, Math.round(words / 200));
+
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -38,224 +41,101 @@ const articleSchema = {
   publisher: { "@type": "Organization", name: "Fishstick Labs", url: siteUrl },
 };
 
-const formatDate = (date: Date) => {
-  return new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(date);
-};
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat("en-US", { year: "numeric", month: "long", day: "numeric" }).format(date);
 ---
 
 <Layout title={`${post.data.title} - Fishstick Labs`} description={post.data.description} canonicalPath={`/blog/${post.slug}`}>
   <nav class="site-nav">
     <div class="nav-inner">
-      <a href="/" class="nav-logo">Fishstick Labs</a>
+      <a href="/" class="nav-logo"><span class="dot"></span>Fishstick Labs</a>
       <div class="nav-links">
         <a href="/blog" class="nav-link">Blog</a>
-        <a href="/#contact" class="nav-link">Contact</a>
+        <a href="mailto:contact@fishsticklabs.com" class="nav-link">Contact</a>
       </div>
     </div>
   </nav>
 
-  <div id="main">
+  <article class="wrap-narrow" style="max-width: 720px; padding-top: 64px; padding-bottom: 40px;">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="/">Home</a>
-      <span class="breadcrumb-sep">/</span>
+      <span class="sep">/</span>
       <a href="/blog">Blog</a>
-      <span class="breadcrumb-sep">/</span>
+      <span class="sep">/</span>
       <span aria-current="page">{post.data.title}</span>
     </nav>
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
 
-    <article class="blog-post">
-      <header class="post-header">
-        <h1>{post.data.title}</h1>
-        <div class="post-meta">
-          <span>{post.data.author}</span>
-          <span class="separator">•</span>
-          <time class="post-date">{formatDate(post.data.pubDate)}</time>
-        </div>
-      </header>
-
-      <div class="post-content">
-        <Content />
+    <header class="post-header">
+      <h1>{post.data.title}</h1>
+      <div class="post-meta">
+        <span>{post.data.author}</span>
+        <span class="sep">·</span>
+        <time>{formatDate(post.data.pubDate)}</time>
+        <span class="sep">·</span>
+        <span>{readingTime} min read</span>
       </div>
-    </article>
+    </header>
 
-    <div class="post-nav-links">
-      <a href="/blog">← All posts</a>
-      <a href="/">Advisory — Fishstick Labs</a>
+    <div class="post-content">
+      <Content />
+    </div>
+  </article>
+
+  <!-- Soft CTA after post -->
+  <div class="wrap-narrow" style="max-width: 720px; padding-bottom: 56px;">
+    <div class="post-cta">
+      <div>
+        <div class="post-cta-title">Staring down a problem like this one?</div>
+        <p>I take on a small number of advisory engagements. Happy to take a look.</p>
+      </div>
+      <a href="mailto:contact@fishsticklabs.com" class="btn btn-primary" style="padding: 12px 22px; font-size: 14.5px; white-space: nowrap;">Get in touch →</a>
     </div>
   </div>
 
+  <div class="wrap-narrow post-nav-links" style="max-width: 720px; padding-bottom: 64px;">
+    <a href="/blog" class="link">← All posts</a>
+    <a href="/" class="link">Advisory — Fishstick Labs →</a>
+  </div>
+
   <footer class="site-footer">
-    <p>
-      <a href="/">Home</a>
-      <span class="footer-sep">·</span>
-      <a href="/blog">Blog</a>
-      <span class="footer-sep">·</span>
-      <a href="/#contact">Contact</a>
-    </p>
-    <p>&copy; {new Date().getFullYear()} Fishstick Labs</p>
+    <div class="row">
+      <a href="/">Home</a><span class="sep">·</span>
+      <a href="/blog">Blog</a><span class="sep">·</span>
+      <a href="mailto:contact@fishsticklabs.com">Contact</a>
+    </div>
+    © {new Date().getFullYear()} Fishstick Labs
   </footer>
 </Layout>
 
 <style is:global>
-  .blog-post {
-    max-width: 700px;
-    margin: 0 auto;
-  }
+  .post-header { margin-bottom: 44px; }
+  .post-header h1 { font-size: clamp(30px, 4.6vw, 44px); line-height: 1.1; margin-bottom: 22px; }
+  .post-meta { display: flex; align-items: center; gap: 11px; flex-wrap: wrap; font-family: var(--mono); font-size: 13px; color: #8b93a7; }
+  .post-meta .sep { color: #4b5563; }
 
-  .post-header {
-    margin-bottom: 50px;
-    text-align: left;
-  }
+  .post-content { font-size: 17.5px; line-height: 1.8; color: #cdd2dc; }
+  .post-content > *:first-child { margin-top: 0; }
+  .post-content p { margin: 0 0 26px; }
+  .post-content h2 { font-size: 25px; font-weight: 600; color: #fff; letter-spacing: -0.015em; margin: 48px 0 18px; }
+  .post-content h3 { font-size: 20px; font-weight: 600; color: #fff; margin: 38px 0 15px; }
+  .post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(167, 139, 250, 0.32); word-break: break-word; transition: color 0.18s ease, border-color 0.18s ease; }
+  .post-content a:hover { color: #c4b5fd; border-bottom-color: #c4b5fd; }
+  .post-content strong { color: #e9ecf2; font-weight: 600; }
+  .post-content ul, .post-content ol { margin: 0 0 26px; padding-left: 26px; }
+  .post-content li { margin-bottom: 10px; }
+  .post-content code { font-family: var(--mono); font-size: 0.86em; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.07); padding: 2px 6px; border-radius: 5px; color: #dcd3f5; }
+  .post-content pre { font-family: var(--mono); font-size: 13.5px; line-height: 1.7; background: #13151d; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 20px 22px; overflow-x: auto; margin: 0 0 26px; color: #c3cad8; }
+  .post-content pre code { background: none; border: none; padding: 0; color: inherit; font-size: inherit; }
+  .post-content blockquote { margin: 30px 0; border-left: 3px solid rgba(255, 255, 255, 0.18); padding: 4px 0 4px 22px; color: #aeb5c2; font-style: italic; }
+  .post-content img { max-width: 100%; height: auto; border-radius: 10px; }
 
-  .post-header h1 {
-    font-size: 2.5em;
-    margin: 0 0 15px 0;
-    line-height: 1.2;
-    background: none;
-    -webkit-background-clip: unset;
-    -webkit-text-fill-color: #ffffff;
-    background-clip: unset;
-    color: #ffffff;
-  }
+  /* Strong "Result:" lines render as <strong> paragraphs in markdown; styled callout for any paragraph that is only bold could be done via plugin — left as bold by default. */
 
-  .post-meta {
-    color: #9ca3af;
-    font-size: 1em;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .post-cta { border: 1px solid rgba(139, 92, 246, 0.18); border-radius: 14px; background: linear-gradient(180deg, rgba(139, 92, 246, 0.07), rgba(139, 92, 246, 0.02)); padding: 30px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .post-cta-title { font-size: 17px; font-weight: 600; color: #fff; margin-bottom: 5px; }
+  .post-cta p { margin: 0; font-size: 14.5px; color: var(--muted); line-height: 1.55; max-width: 400px; }
 
-  .post-meta .separator {
-    color: #6b7280;
-  }
-
-  .post-date {
-    color: #9ca3af;
-    font-size: 1em;
-  }
-
-  .breadcrumb {
-    font-size: 0.9em;
-    color: #9ca3af;
-    margin-bottom: 24px;
-  }
-
-  .breadcrumb a {
-    color: #a78bfa;
-    border: none;
-  }
-
-  .breadcrumb-sep {
-    margin: 0 0.4em;
-    color: #6b7280;
-  }
-
-  .post-nav-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1em;
-    margin-top: 60px;
-  }
-
-  .post-nav-links a {
-    color: #a78bfa;
-    border: none;
-  }
-
-  .post-content {
-    color: #e8eaed;
-    font-size: 1.1em;
-    line-height: 1.8;
-  }
-
-  .post-content h2 {
-    font-size: 1.8em;
-    color: #ffffff;
-    margin: 50px 0 20px 0;
-    font-weight: 600;
-  }
-
-  .post-content h3 {
-    font-size: 1.4em;
-    color: #ffffff;
-    margin: 40px 0 15px 0;
-    font-weight: 600;
-  }
-
-  .post-content p {
-    margin: 0 0 25px 0;
-  }
-
-  .post-content a {
-    color: #60a5fa;
-    border-bottom: 1px solid rgba(96, 165, 250, 0.3);
-    display: inline;
-    word-break: break-word;
-  }
-
-  .post-content a:hover {
-    color: #93c5fd;
-    border-bottom-color: #93c5fd;
-  }
-
-  .post-content ul,
-  .post-content ol {
-    margin: 0 0 25px 0;
-    padding-left: 30px;
-  }
-
-  .post-content li {
-    margin-bottom: 10px;
-  }
-
-  .post-content code {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 3px 6px;
-    border-radius: 4px;
-    font-size: 0.9em;
-    font-family: "Courier New", monospace;
-  }
-
-  .post-content pre {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    border-radius: 8px;
-    overflow-x: auto;
-    margin: 0 0 25px 0;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-
-  .post-content pre code {
-    background: none;
-    padding: 0;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-
-  .post-content blockquote {
-    border-left: 3px solid #60a5fa;
-    padding-left: 20px;
-    margin: 30px 0;
-    color: #d1d5db;
-    font-style: italic;
-  }
-
-  @media (max-width: 768px) {
-    .post-header h1 {
-      font-size: 2em;
-    }
-
-    .post-content {
-      font-size: 1em;
-    }
-  }
+  .post-nav-links { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-family: var(--mono); font-size: 14px; }
 </style>
-
